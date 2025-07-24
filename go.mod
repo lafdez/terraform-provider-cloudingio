@@ -1,6 +1,6 @@
 module github.com/lafdez/terraform-provider-cloudingio
 
-go 1.24.4
+go 1.24.5
 
 require github.com/hashicorp/terraform-plugin-framework v1.15.0
 

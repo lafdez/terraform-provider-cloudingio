@@ -5,8 +5,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/lafdez/terraform-provider-cloudingio"
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
+	"github.com/lafdez/terraform-provider-cloudingio/provider"
 )
 
 var (
@@ -14,12 +14,17 @@ var (
 )
 
 func main() {
-	opts := providerserver.ServerOpts {
+	var debug bool
+
+	flag.BoolVar(&debug, "debug", false, "set to true to enable debug")
+	flag.Parse()
+
+	opts := providerserver.ServeOpts {
 		Address: "github.com/lafdez/terraform-provider-cloudingio",
 		Debug: debug,
 	}
 
-	err := providerserver.Serve(context,.Background(), provider.New(version), opts)
+	err := providerserver.Serve(context.Background(), provider.New(version), opts)
 
 	if err != nil {
 		log.Fatal(err.Error())
