@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/ephemeral"
-	"github.com/hashicorp/terraform-plugin-framework/function"
+	_ "github.com/hashicorp/terraform-plugin-framework/ephemeral"
+	_ "github.com/hashicorp/terraform-plugin-framework/function"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -54,7 +54,13 @@ func (p *CloudingIOProvider) Configure(ctx context.Context, req provider.Configu
 	resp.ResourceData = client
 }
 
+func (p *CloudingIOProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
+	return []func() datasource.DataSource{}
+}
 
+func (p *CloudingIOProvider) Resources(ctx context.Context) []func() resource.Resource {
+	return []func() resource.Resource{}
+}
 
 func New(version string) func() provider.Provider {
 	return func() provider.Provider {
